@@ -1,0 +1,2 @@
+---
+packetfence_monit__configurations: "os-checks,packetfence,active-active"

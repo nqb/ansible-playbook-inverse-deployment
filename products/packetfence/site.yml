@@ -1,11 +1,18 @@
 ---
+# Specific to centos  
+- import_playbook: playbooks/set-time.yml
+  tags: time
+
+- import_playbook: playbooks/set-ip-addresses.yml
+  tags: network
+
 - hosts: pfservers
   name: install pf on standalones
   become: True
   roles:
-    - role: packetfence_common
+    - role: inverse_inc.packetfence.packetfence_common
       tags: install
-    - role: packetfence_install
+    - role: inverse_inc.packetfence.packetfence_install
       tags: install
 
 # fixme
@@ -15,13 +22,6 @@
 # TODO
 # upgrade OS
 # utils
-
-# specific to centos
-- import_playbook: playbooks/set-ip-addresses.yml
-  tags: network
-  
-- import_playbook: playbooks/set-time.yml
-  tags: time
 
 # postconfig
 - import_playbook: playbooks/postconfig.yml
