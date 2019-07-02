@@ -12,6 +12,7 @@
 ```bash
 apt install python-pip git
 git clone URL_OF_THIS_REPO
+cd ansible-playbook-inverse-deployment/products/packetfence
 pip install --user mazer
 pip install --user ansible
 # update your PATH to have ~/.local/bin in it
