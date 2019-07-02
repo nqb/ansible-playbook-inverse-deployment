@@ -1,0 +1,11 @@
+[clusters]
+pf1
+pf2
+pf3
+
+[standalones]
+pf4
+
+[pfservers:children]
+
+[prod]

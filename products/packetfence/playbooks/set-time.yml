@@ -1,0 +1,33 @@
+- name: set time for centos
+  hosts: pfservers
+  become: True
+  vars:
+    timesync_ntp_provider: chrony
+  roles:
+    - linux-system-roles.timesync
+
+# split in separate play to get result of chrony after
+# restart by handler
+- hosts: pfservers
+  become: True
+  gather_facts: False
+  tasks:
+    - name: set timezone {{ packetfence_install__config_general['timezone'] }}
+      timezone:
+        name: "{{ packetfence_install__config_general['timezone'] }}"
+
+    - name: check final config
+      command: chronyc sources
+      register: chronyc_result
+
+    - name: print final config
+      debug:
+        var: chronyc_result
+
+    - name: refresh facts
+      setup:
+        filter: ansible_date_time*
+
+    - name: print current timezone
+      debug:
+        var: ansible_date_time['time']

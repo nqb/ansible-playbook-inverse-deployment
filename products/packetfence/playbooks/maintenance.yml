@@ -1,0 +1,60 @@
+---
+- name: Apply maintenance and restart services
+  hosts: pfservers
+  serial: 1
+  become: True
+  gather_facts: False
+  vars:
+    pf_root: /usr/local/pf
+    pf_pfcmd: "{{ pf_root }}/bin/pfcmd"
+    pf_maint: "{{ pf_root }}/addons/pf-maint.pl"
+
+  tasks:
+    - name: Stop and disable monit
+      service:
+        name: monit
+        state: stopped
+        enabled: no
+      tags: monit
+
+    - name: Apply maintenance patchs if needed
+      command: "{{ pf_maint }} -n"
+      register: maint_result
+      # don't fail if proxy_env is not defined
+      environment: "{{ proxy_env|default() }}"
+
+    - name: Print result of maintenance
+      debug:
+        msg: "{{ maint_result.stdout_lines }}"
+
+    # Restart pf and notify to start monit
+    - name: Restart pf
+      command: "{{ pf_pfcmd }} service pf restart"
+      register: pfcmd_result
+      notify: start monit
+
+    - name: Print result of pfcmd
+      debug:
+        msg: "{{ pfcmd_result.stdout_lines }}"
+
+  handlers:
+    - name: start monit
+      service:
+        name: monit
+        state: started
+        enabled: yes
+
+- name: Verify state of services
+  hosts: all
+  become: True
+  tags: monit
+
+  tasks:
+    - name: Monit summary
+      command: monit summary
+      register: monit_result
+
+    # if monit is not running, we will see it
+    - name: Print result of monit summary
+      debug:
+        msg: "{{ monit_result.stdout_lines }}"

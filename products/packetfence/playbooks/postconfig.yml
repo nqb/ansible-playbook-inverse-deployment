@@ -1,0 +1,34 @@
+- name: postconfig pfservers
+  hosts: pfservers
+  become: True
+
+  vars:
+    postconf_email_recipients: "{{ packetfence_monit__emails }}"
+
+  tasks:
+  - name: Set relayhost in Postfix
+    command:
+    args:
+      argv:
+        - postconf
+        - -e
+        - relayhost = [{{ smtp_server }}]:{{ smtp_port | default(25) }}
+    tags: mail
+
+    # We don't use handler because we should use new postfix config before end of play
+    # (to send email)
+  - name: Reload postfix
+    service:
+      name: postfix
+      state: reloaded
+    tags: mail
+
+  # We use local postfix to send email, it will use relayhost
+  - name: Send test email
+    mail:
+      host: 127.0.0.1
+      port: 25
+      secure: never
+      subject: System {{ ansible_hostname }} has been successfully provisioned.
+      to: "{{ postconf_email_recipients }}"
+    tags: mail

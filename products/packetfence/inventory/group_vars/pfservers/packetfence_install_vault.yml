@@ -1,0 +1,19 @@
+---
+# packetfence_install__database_root_pass: secret
+# packetfence_install__database_pass: secret
+
+# packetfence_install__admin_user:
+#   pid: admin
+#   password: secret
+
+# packetfence_install__users:
+# - body_user:
+#     pid: admin2
+#     email: admin2@foo.com
+#   body_user_password:
+#     access_level: ALL
+#     expiration: "2038-01-01 00:00:00"
+#     password: secret
+#     valid_from: "{{ ansible_date_time['date'] }} {{ ansible_date_time['time'] }}"
+# packetfence_install__config_fingerbank_setting_upstream:
+#   api_key: fingerbank_api_key

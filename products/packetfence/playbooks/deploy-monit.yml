@@ -1,0 +1,8 @@
+---
+- name: deploy monit on pf servers
+  hosts: pfservers
+  become: True
+  # don't fail if proxy_env is not defined
+  environment: "{{ proxy_env|default() }}"
+  roles:
+    - packetfence_monit
