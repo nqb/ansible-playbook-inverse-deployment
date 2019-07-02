@@ -1,12 +1,4 @@
 ---
 ## CentOS
-# time
 - src: linux-system-roles.timesync
-# network cards
 - src: linux-system-roles.network
-
-## PacketFence
-# - src: pf.common
-# - src: pf.install
-# - src: pf.monit
-# - src: pf.support

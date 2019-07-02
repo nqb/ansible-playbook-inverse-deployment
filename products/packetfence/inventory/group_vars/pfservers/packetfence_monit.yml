@@ -1,0 +1,4 @@
+---
+packetfence_monit__emails: "{{ packetfence_install__config_alerting['emailaddr'] }}"
+packetfence_monit__subject: "{{ ansible_hostname }}"
+packetfence_monit__mailserver: localhost

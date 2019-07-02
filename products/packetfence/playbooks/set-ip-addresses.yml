@@ -5,12 +5,3 @@
 
   roles:
     - role: linux-system-roles.network
-      # vars:
-      #   network_provider: initscripts
-      #   network_connections:
-        # - name: "{{ conf_pf_interfaces[0]['intname'] }}"
-        #   state: up
-        #   # mandatory
-        #   type: ethernet
-        #   ip:
-        #     address: "{{ conf_pf_interfaces[0]['ip'] }}/22"

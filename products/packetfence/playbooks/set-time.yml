@@ -12,9 +12,9 @@
   become: True
   gather_facts: False
   tasks:
-    - name: set timezone {{ packetfence_install__config_general['timezone'] }}
+    - name: set timezone {{ timezone }}
       timezone:
-        name: "{{ packetfence_install__config_general['timezone'] }}"
+        name: "{{ timezone }}"
 
     - name: check final config
       command: chronyc sources

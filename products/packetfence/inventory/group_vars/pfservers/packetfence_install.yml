@@ -1,14 +1,35 @@
 ---
-# packetfence_install__mgmt_interface:
-#   id: "{{ ansible_default_ipv4['interface'] }}"
-#   ip: "{{ ansible_default_ipv4['address'] }}"
-#   mask: "{{ ansible_default_ipv4['netmask'] }}"
-#   type: management,portal
+timesync_ntp_servers:
+  - hostname: 0.centos.pool.ntp.org
+    iburst: yes
+  - hostname: 1.centos.pool.ntp.org
+    iburst: yes
+  - hostname: 2.centos.pool.ntp.org
+    iburst: yes
+  - hostname: 3.centos.pool.ntp.org
+    iburst: yes
+timezone: Europe/Paris
+
+smtp_server: ''
+  
+packetfence_install__centos_packages:
+  - packetfence-9.0.1
+  - packetfence-ntlm-wrapper-9.0.1
+
+packetfence_install__deb_packages:
+  - packetfence=9.0.1
+  
+packetfence_install__mgmt_interface:
+  id: "{{ ansible_default_ipv4['interface'] }}"
+  ip: "{{ ansible_default_ipv4['address'] }}"
+  mask: "{{ ansible_default_ipv4['netmask'] }}"
+  type: management,portal
+
 # packetfence_install__config_base_general:
 #   hostname: "{{ ansible_distribution|lower }}"
 #   domain: example.lan
 #   dhcpservers: 10.0.0.1,192.168.122.1
-#   timezone: Europe/Paris
+#   timezone: {{ timezone }}
 # packetfence_install__config_base_alerting:
 #   smtpserver: localhost
 #   fromaddr: "{{ packetfence_install__config_base_general['hostname'] }}@{{ packetfence_install__config_base_general['domain'] }}"

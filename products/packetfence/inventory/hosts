@@ -1,11 +1,11 @@
 [clusters]
-pf1
 pf2
 pf3
-
-[standalones]
 pf4
 
-[pfservers:children]
+[standalones]
+pf1
 
-[prod]
+[pfservers:children]
+clusters
+standalones
