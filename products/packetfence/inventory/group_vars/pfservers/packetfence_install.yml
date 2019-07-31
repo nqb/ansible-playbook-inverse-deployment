@@ -29,7 +29,7 @@ packetfence_install__mgmt_interface:
 #   hostname: "{{ ansible_distribution|lower }}"
 #   domain: example.lan
 #   dhcpservers: 10.0.0.1,192.168.122.1
-#   timezone: {{ timezone }}
+#   timezone: "{{ timezone }}"
 # packetfence_install__config_base_alerting:
 #   smtpserver: localhost
 #   fromaddr: "{{ packetfence_install__config_base_general['hostname'] }}@{{ packetfence_install__config_base_general['domain'] }}"
