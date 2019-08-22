@@ -17,7 +17,7 @@ packetfence_install__centos_packages:
   - packetfence-ntlm-wrapper-9.0.1
 
 packetfence_install__deb_packages:
-  - packetfence=9.0.1
+  - packetfence=9.0.1-1
   
 packetfence_install__mgmt_interface:
   id: "{{ ansible_default_ipv4['interface'] }}"
