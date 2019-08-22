@@ -1,0 +1,22 @@
+---
+packetfence_install__database_users:
+  - name: pf
+    password: "{{ packetfence_install__database_pass }}"
+    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE/mysql.proc:SELECT/pf.radius_nas:DROP"
+    append_privs: no
+    host: "localhost"
+  - name: pf
+    password: "{{ packetfence_install__database_pass }}"
+    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE/mysql.proc:SELECT/pf.radius_nas:DROP"
+    append_privs: no
+    host: "%"
+  - name: pfcluster
+    password: "secret"
+    priv: "*.*:PROCESS,RELOAD,LOCK TABLES,REPLICATION CLIENT,SUPER"
+    append_privs: no
+    host: "localhost"
+  - name: pfcluster
+    password: "secret"
+    priv: "*.*:PROCESS,RELOAD,LOCK TABLES,REPLICATION CLIENT,SUPER"
+    append_privs: no
+    host: "%"
