@@ -27,6 +27,9 @@
 - import_playbook: playbooks/postconfig.yml
   tags: postconfig
 
+- import_playbook: playbooks/nullmailer.yml
+  tags: nullmailer
+
 # monit
 # - import_playbook: playbooks/deploy-monit.yml
 #   tags: monit
