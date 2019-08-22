@@ -43,6 +43,7 @@
         name: monit
         state: started
         enabled: yes
+      tags: monit
 
 - name: Verify state of services
   hosts: all
