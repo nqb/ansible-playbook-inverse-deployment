@@ -1,0 +1,11 @@
+---
+nullmailer__relayhost: '10.10.10.10'
+
+# to which address send emails
+nullmailer__adminaddr: [ 'foo@foo.ca' ]
+
+# to receive emails from ansible_hostname@
+nullmailer__defaulthost: '{{ ansible_hostname }}'
+
+# listen on localhost:25
+nullmailer__smtpd: True
