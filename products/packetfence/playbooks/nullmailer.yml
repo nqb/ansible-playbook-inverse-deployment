@@ -1,0 +1,7 @@
+---
+- name: configure nullmailer for debian
+  hosts: pfservers
+  become: True
+
+  roles:
+    - debops.debops.nullmailer
