@@ -38,4 +38,5 @@ ansible-playbook site.yml -i YOUR_INVENTORY_LOCATION --tags time,network,install
 ansible pf1 -m reboot -i YOUR_INVENTORY_LOCATION --vault-id @prompt
 
 ansible-playbook site.yml -i YOUR_INVENTORY_LOCATION --tags maintenance --vault-id @prompt
+ansible-playbook site.yml -i YOUR_INVENTORY_LOCATION --tags maintenance --skip-tags monit --vault-id @prompt
 ```
