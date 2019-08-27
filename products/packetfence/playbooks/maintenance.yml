@@ -27,23 +27,21 @@
       debug:
         msg: "{{ maint_result.stdout_lines }}"
 
-    # Restart pf and notify to start monit
     - name: Restart pf
       command: "{{ pf_pfcmd }} service pf restart"
       register: pfcmd_result
-      notify: start monit
 
-    - name: Print result of pfcmd
-      debug:
-        msg: "{{ pfcmd_result.stdout_lines }}"
-
-  handlers:
     - name: start monit
       service:
         name: monit
         state: started
         enabled: yes
       tags: monit
+
+    - name: Print result of pfcmd
+      debug:
+        msg: "{{ pfcmd_result.stdout_lines }}"
+
 
 - name: Verify state of services
   hosts: all
