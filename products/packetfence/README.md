@@ -2,8 +2,7 @@
 
 ## Prerequisites to use this repo ##
 
-- Ansible
-- Mazer
+- Ansible >= 2.9
 
 ## Steps to deploy a PacketFence server ##
 
@@ -13,11 +12,10 @@
 apt install python-pip git
 git clone URL_OF_THIS_REPO
 cd ansible-playbook-inverse-deployment/products/packetfence
-pip install --user mazer
 pip install --user ansible
 # update your PATH to have ~/.local/bin in it
-ansible-galaxy install -r requirements.yml
-mazer install -l collections_lockfile.yml
+ansible-galaxy role install -r requirements.yml
+ansible-galaxy collection install -r requirements.yml
 ```
 
 ### Set up your inventory ###
