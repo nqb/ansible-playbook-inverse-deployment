@@ -13,11 +13,10 @@ timezone: Europe/Paris
 smtp_server: ''
   
 packetfence_install__centos_packages:
-  - packetfence-9.1.0
-  - packetfence-ntlm-wrapper-9.1.0
+  - packetfence-9.2.0
 
 packetfence_install__deb_packages:
-  - packetfence=9.1.0-1
+  - packetfence=9.2.0
   
 packetfence_install__mgmt_interface:
   id: "{{ ansible_default_ipv4['interface'] }}"

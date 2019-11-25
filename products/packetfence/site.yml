@@ -9,10 +9,12 @@
 - hosts: pfservers
   name: install pf on standalones
   become: True
+  collections:
+    - inverse_inc.packetfence
   roles:
-    - role: inverse_inc.packetfence.packetfence_common
+    - role: packetfence_common
       tags: install
-    - role: inverse_inc.packetfence.packetfence_install
+    - role: packetfence_install
       tags: install
 
 # fixme

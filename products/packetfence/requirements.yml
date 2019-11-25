@@ -1,4 +1,9 @@
 ---
 ## CentOS
-- src: linux-system-roles.timesync
-- src: linux-system-roles.network
+roles:
+  - src: linux-system-roles.timesync
+  - src: linux-system-roles.network
+
+collections:
+  - name: inverse_inc.packetfence
+  - name: debops.debops
