@@ -1,17 +1,4 @@
 ---
-timesync_ntp_servers:
-  - hostname: 0.centos.pool.ntp.org
-    iburst: yes
-  - hostname: 1.centos.pool.ntp.org
-    iburst: yes
-  - hostname: 2.centos.pool.ntp.org
-    iburst: yes
-  - hostname: 3.centos.pool.ntp.org
-    iburst: yes
-timezone: Europe/Paris
-
-smtp_server: ''
-  
 packetfence_install__centos_packages:
   - packetfence-9.3.0
 
@@ -24,22 +11,86 @@ packetfence_install__mgmt_interface:
   mask: "{{ ansible_default_ipv4['netmask'] }}"
   type: management,portal
 
-# packetfence_install__config_base_general:
-#   hostname: "{{ ansible_distribution|lower }}"
-#   domain: example.lan
-#   dhcpservers: 10.0.0.1,192.168.122.1
-#   timezone: "{{ timezone }}"
-# packetfence_install__config_base_alerting:
-#   smtpserver: localhost
-#   fromaddr: "{{ packetfence_install__config_base_general['hostname'] }}@{{ packetfence_install__config_base_general['domain'] }}"
-#   emailaddr: alerting@inverse.ca
-#   smtp_port: 1025
-#   smtp_verifyssl: disabled
-#   subjectprefix: PF UNDER TEST
-#   smtp_timeout: 30
-# packetfence_install__config_base_advanced:
-#   hash_passwords: ntlm
-# packetfence_install__sources:
-#   - id: Blackhole
-#     description: Blackhole
-#     type: Blackhole
+packetfence_install__alerting_emailaddr: 'pf@localhost'
+
+packetfence_install__configuration:
+
+      - name: 'pf.conf'
+        sections:
+
+          - name: 'general'
+            settings:
+
+              - name: 'domain'
+                value: '{{ ansible_domain }}'
+
+              - name: 'hostname'
+                value: 'nac'
+
+              - name: 'timezone'
+                value: "{{ ansible_date_time['tz'] }}"
+
+          - name: 'alerting'
+            settings:
+
+              - name: 'emailaddr'
+                value: '{{ packetfence_install__alerting_emailaddr }}'
+
+
+          - name: 'database'
+            settings:
+
+              - name: 'pass'
+                value: '{{ packetfence_install__database_pass }}'
+
+          - name: 'advanced'
+            settings:
+
+              - name: 'configurator'
+                value: '{{ packetfence_install__configurator_status }}'
+
+              - name: 'hash_passwords'
+                value: 'ntlm'
+
+          - name: "interface {{ packetfence_install__mgmt_interface['id'] }}"
+            settings:
+
+              - name: 'ip'
+                value: "{{ packetfence_install__mgmt_interface['ip'] }}"
+
+              - name: 'mask'
+                value: "{{ packetfence_install__mgmt_interface['mask'] }}"
+
+              - name: 'type'
+                value: "{{ packetfence_install__mgmt_interface['type'] }}"
+
+      - name: 'pfconfig.conf'
+        sections:
+
+          - name: 'general'
+            settings:
+
+              - name: 'backend'
+                value: 'mysql'
+
+          - name: 'mysql'
+            settings:
+
+              - name: 'host'
+                value: 'localhost'
+
+              - name: 'user'
+                value: '{{ packetfence_install__database_default_user }}'
+
+              - name: 'pass'
+                value: '{{ packetfence_install__database_pass }}'
+
+              - name: 'db'
+                value: '{{ packetfence_install__database_db }}'
+
+              - name: 'port'
+                value: '3306'
+
+              - name: 'table'
+                value: 'keyed'
+
