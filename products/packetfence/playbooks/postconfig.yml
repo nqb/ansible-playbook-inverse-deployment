@@ -12,7 +12,7 @@
       argv:
         - postconf
         - -e
-        - relayhost = [{{ smtp_server }}]:{{ smtp_port | default(25) }}
+        - relayhost = [{{ relayhost }}]:{{ smtp_port | default(25) }}
     tags: mail
 
     # We don't use handler because we should use new postfix config before end of play

@@ -1,0 +1,13 @@
+---
+timesync_ntp_servers:
+  - hostname: 0.centos.pool.ntp.org
+    iburst: yes
+  - hostname: 1.centos.pool.ntp.org
+    iburst: yes
+  - hostname: 2.centos.pool.ntp.org
+    iburst: yes
+  - hostname: 3.centos.pool.ntp.org
+    iburst: yes
+
+timezone: UTC
+
