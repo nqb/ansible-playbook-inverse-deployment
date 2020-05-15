@@ -3,7 +3,7 @@ packetfence_install__centos_packages:
   - packetfence-10.0.1
 
 packetfence_install__deb_packages:
-  - packetfence=10.0.1
+  - packetfence=10.0.1+20200508121634+144087563+0009+v10.0.1+stretch1
   
 packetfence_install__mgmt_interface:
   id: "{{ ansible_default_ipv4['interface'] }}"
